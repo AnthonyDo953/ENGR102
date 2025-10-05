@@ -7,7 +7,6 @@
 # Assignment: Lab 7.21.1 Kaprekar's Constant Challenge
 # Date: 02 October 2025
 
-
 iterations = 0
 
 for i in range(10000):
