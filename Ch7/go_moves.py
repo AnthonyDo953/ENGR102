@@ -18,6 +18,7 @@ board = [['.' for i in range(cols)] for i in range(rows)]
 
 blackTurn = ''
 whiteTurn = ''
+game = True
 
 # Display the current state of the board
 def displayBoard():
@@ -28,25 +29,39 @@ def displayBoard():
 
 # Update the board according to white's turn
 def updateBoardWT(wt):
-    wc = int(wt.split()[0])
-    wr = int(wt.split()[1])
+    if wt.lower() != 'stop':
+        wc = int(wt.split()[0])
+        wr = int(wt.split()[1])
 
-    if board[9 - wc][wr - 1] == '.':
-        board[9 - wc][wr - 1] = chr(9679)
-        return True
+        if not (0 < wc <= 9 and 0 < wr <= 9):
+            return False
+        else:
+            if board[9 - wr][wc - 1] == '.':
+                board[9 - wr][wc - 1] = chr(9679)
+                return True
+            else:
+                return False
     else:
-        return False
+        print("Game stopped")
+        exit()
 
 # Update the board according to black's turn
 def updateBoardBT(bt):
-    bc = int(bt.split()[0])
-    br = int(bt.split()[1])
+    if bt.lower() != 'stop':
+        bc = int(bt.split()[0])
+        br = int(bt.split()[1])
 
-    if board[9 - bc][br - 1] == '.':
-        board[9 - bc][br - 1] = chr(9675)
-        return True
+        if not (0 < bc <= 9 and 0 < br <= 9):
+            return False
+        else:
+            if board[9 - br][bc - 1] == '.':
+                board[9 - br][bc - 1] = chr(9675)
+                return True
+            else:
+                return False
     else:
-        return False
+        print("Game stopped")
+        exit()
 
 # Keep playing until one of the players says to stop
 while True: 
@@ -55,25 +70,19 @@ while True:
     # Black's turn
     blackTurn = input('Black Turn!\nEnter the coordinate you wish to place a stone: ')
     # Keep playing unless black says to stop
-    if blackTurn.lower() != 'stop':
-        # If the black player puts in an invalid move, ask them to try again until they do
-        while not updateBoardBT(blackTurn):
-            print('There is already a stone at that coordinate. Try again.')
-            blackTurn = input('Black Turn!\nEnter the coordinate you wish to place a stone: ')
-    else:
-        print("Game stopped")
-        break
+    # If the black player puts in an invalid move, ask them to try again until they do
+    while not updateBoardBT(blackTurn):
+        displayBoard()
+        print('That is not a valid move. Try again.')
+        blackTurn = input('Black Turn!\nEnter the coordinate you wish to place a stone: ')
 
     # Display the board after every move
     displayBoard()
     # White's turn
     whiteTurn = input('White Turn!\nEnter the coordinate you wish to place a stone: ')
     # Keep playing unless white says to stop
-    if whiteTurn.lower() != 'stop':
-        # If the black player puts in an invalid move, ask them to try again until they do
-        while not updateBoardWT(whiteTurn):
-            print('There is already a stone at that coordinate. Try again.')
-            whiteTurn = input('White Turn!\nEnter the coordinate you wish to place a stone: ')
-    else:
-        print("Game stopped")
-        break
+    # If the black player puts in an invalid move, ask them to try again until they do
+    while not updateBoardWT(whiteTurn):
+        displayBoard()
+        print('That is not a valid move. Try again.')
+        whiteTurn = input('White Turn!\nEnter the coordinate you wish to place a stone: ')
