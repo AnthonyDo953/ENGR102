@@ -16,7 +16,7 @@ def parta(numbers):
         output.insert(1, (numbersSorted[int(len(numbersSorted) / 2)] + numbersSorted[int(len(numbersSorted) / 2 - 1)]) / 2)
     else:
         output.insert(1, numbersSorted[int(len(numbersSorted) / 2)])
-    return output
+    return (output[0], output[1], output[2])
 
 def partb(times, distances):
     output = []
