@@ -1,11 +1,31 @@
-def parta(numbers):
-    numbersSorted = sorted(numbers)
-    # [1, 2, 3, 4, 5, 6, 7, 8]
-    output = [numbersSorted[0], numbersSorted[len(numbersSorted) - 1]]
-    if len(numbersSorted) % 2 == 0:
-        output.insert(1, (numbersSorted[int(len(numbersSorted) / 2)] + numbersSorted[int(len(numbersSorted) / 2 - 1)]) / 2)
-    else:
-        output.insert(1, numbersSorted[int(len(numbersSorted) / 2)])
-    return output
+import re
+puzzle = "RUE,EAR | RUMORS,UEII  ,UKTR ,EAR ,KEOS,KAIK,USA"
 
-print(parta([1,2,4,5,6]))
+def make_number(word, guess):
+    conversion = ""
+    dict = {}
+    i = 0
+
+    for letter in guess:
+        dict.update({letter: str(i)})
+        i += 1
+    
+    for letter in word:
+        if letter in dict:
+            conversion += dict[letter]
+
+    return int(conversion)
+
+def make_numbers(puzzle, guess):
+    puzzlePieces = puzzle.split(',')
+    puzzlePieces.insert(2, puzzlePieces[1].split('|')[1])
+    puzzlePieces[1] = puzzlePieces[1].split('|')[0]
+
+    dividend = make_number(puzzlePieces[2], guess)
+    quotient = make_number(puzzlePieces[0], guess)
+    divisor = make_number(puzzlePieces[1], guess)
+    remainder = make_number(puzzlePieces[len(puzzlePieces) - 1], guess)
+
+    return (dividend, quotient, divisor, remainder)
+
+print(make_numbers(puzzle, 'TAKEOURSIM'))
