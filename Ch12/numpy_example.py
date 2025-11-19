@@ -16,7 +16,7 @@
 import numpy as np
 
 # Makes a matrix from 0 to 11 with 3 rows and 4 columns
-a = np.arange(12).reshape(3, 4)
+a = np.arange(12).reshape(3, 4) #[0,1,2,...,11]
 print(f"A = {a}\n")
 
 # Makes a matrix from 0 to 7 with 4 rows and 2 columns

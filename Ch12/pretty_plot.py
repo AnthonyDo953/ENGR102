@@ -23,4 +23,7 @@ for i in range(250):
     print(f"x = {newPoint[0][0]} y = {newPoint[1][0]}")
     plt.plot(newPoint[0][0], newPoint[1][0], 'o')
 
+plt.xlabel('x')
+plt.ylabel('y')
+plt.title("Plot of an Archimedean Spiral")
 plt.show()
